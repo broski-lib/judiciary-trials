@@ -1,0 +1,30 @@
+<Project>
+
+  <!--
+    Paths used by the mod project.
+
+    Override any of these by setting environment variables before running
+    `dotnet build`:
+        export RIMWORLD_PATH=/path/to/RimWorld
+        export RIMWORLD_HARMONY_PATH=/path/to/Harmony/2009463077
+
+    Defaults assume a standard Steam install on Linux.
+  -->
+  <PropertyGroup>
+    <!-- RimWorld install (the parent of RimWorldLinux_Data) -->
+    <RimWorldPath Condition="'$(RimWorldPath)' == '' and '$(RIMWORLD_PATH)' != ''">$(RIMWORLD_PATH)</RimWorldPath>
+    <RimWorldPath Condition="'$(RimWorldPath)' == ''">$(HOME)/.local/share/Steam/steamapps/common/RimWorld</RimWorldPath>
+    <RimWorldManagedDir>$(RimWorldPath)/RimWorldLinux_Data/Managed</RimWorldManagedDir>
+
+    <!--
+      Steam workshop Harmony mod by Andreas Pardeike (id 2009463077).
+      The mod ships 0Harmony.dll in <Root>/Current/Assemblies/ for RimWorld 1.6+.
+      Referencing this DLL (instead of a NuGet copy) guarantees we build
+      against the exact same binary the game will load at runtime.
+    -->
+    <RimWorldHarmonyPath Condition="'$(RimWorldHarmonyPath)' == '' and '$(RIMWORLD_HARMONY_PATH)' != ''">$(RIMWORLD_HARMONY_PATH)</RimWorldHarmonyPath>
+    <RimWorldHarmonyPath Condition="'$(RimWorldHarmonyPath)' == ''">$(HOME)/.local/share/Steam/steamapps/workshop/content/294100/2009463077</RimWorldHarmonyPath>
+    <RimWorldHarmonyDll>$(RimWorldHarmonyPath)/Current/Assemblies/0Harmony.dll</RimWorldHarmonyDll>
+  </PropertyGroup>
+
+</Project>
