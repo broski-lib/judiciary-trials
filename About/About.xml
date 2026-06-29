@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
     <name>Judiciary - Trials</name>
     <author>broski-lib</author>
@@ -7,6 +7,6 @@
         <li>1.6</li>
     </supportedVersions>
     <description>
-    A mod expanding the ideology trial and guilty system in rimworld
+        A mod expanding the ideology trial and guilty system in Rimworld
     </description>
 </ModMetaData>
