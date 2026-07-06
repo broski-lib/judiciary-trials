@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Remove trial ability and make it a Ritual -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/PreceptDef[defName="Trial"]/useCooldownFromAbilityGroupDef</xpath>
+    </Operation>
+
+    <!-- Artifact of trial ability-->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/PreceptDef[defName="IdeoRole_Leader"]/grantedAbilities/li[text()="Trial"]</xpath>
+    </Operation>
+
+    <!-- Add gizmo to ideo spots-->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RitualPatternDef[defName="Trial"]</xpath>
+        <value>
+            <ritualObligationTargetFilter>AnyIdeoBuildingOrRitualSpot</ritualObligationTargetFilter>
+        </value>
+    </Operation>
+
+    <!-- Can be started at any time -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RitualPatternDef[defName="Trial"]</xpath>
+        <value>
+            <alwaysStartAnytime>true</alwaysStartAnytime>
+        </value>
+    </Operation>
+
+    <!-- Any colonist in the ideo can fill the leader/organizer role -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RitualBehaviorDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]/roles/li[id="leader"]</xpath>
+        <value>
+            <substitutable>true</substitutable>
+        </value>
+    </Operation>
+
+    <!-- Disable ideo coloring on the trial gizmo -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/PreceptDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]</xpath>
+        <value>
+            <iconIgnoresIdeoColor>true</iconIgnoresIdeoColor>
+        </value>
+    </Operation>
+</Patch>

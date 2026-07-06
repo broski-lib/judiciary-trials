@@ -1,4 +1,5 @@
 ﻿using Verse;
+using HarmonyLib;
 
 namespace Broski.Judiciary.Trials
 {
@@ -7,7 +8,11 @@ namespace Broski.Judiciary.Trials
     {
         static ModMain()
         {
-            Log.Message("[MyFirstMod] Hello from Linux! The C# assembly has loaded successfully.");
+            var harmony = new Harmony("Judiciary.Trials");
+
+            harmony.PatchAll();
+
+            Log.Message("[Judiciary] successfully patched");
         }
     }
 }
