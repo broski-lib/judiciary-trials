@@ -1,21 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-    <!-- Remove trial ability and make it a Ritual -->
+    <!-- Remove trial ability from leader group, making it a Ritual -->
     <Operation Class="PatchOperationRemove">
-        <xpath>Defs/PreceptDef[defName="Trial"]/useCooldownFromAbilityGroupDef</xpath>
+        <xpath
+        >Defs/PreceptDef[defName="Trial"]/useCooldownFromAbilityGroupDef</xpath>
     </Operation>
 
-    <!-- Artifact of trial ability-->
+    <!-- Remove trial ability from leader-->
     <Operation Class="PatchOperationRemove">
-        <xpath>Defs/PreceptDef[defName="IdeoRole_Leader"]/grantedAbilities/li[text()="Trial"]</xpath>
+        <xpath
+        >Defs/PreceptDef[defName="IdeoRole_Leader"]/grantedAbilities/li[text()="Trial"]</xpath>
     </Operation>
 
     <!-- Add gizmo to ideo spots-->
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/RitualPatternDef[defName="Trial"]</xpath>
         <value>
-            <ritualObligationTargetFilter>AnyIdeoBuildingOrRitualSpot</ritualObligationTargetFilter>
+            <ritualObligationTargetFilter
+            >AnyIdeoBuildingOrRitualSpot</ritualObligationTargetFilter>
         </value>
     </Operation>
 
@@ -29,7 +32,8 @@
 
     <!-- Any colonist in the ideo can fill the leader/organizer role -->
     <Operation Class="PatchOperationAdd">
-        <xpath>Defs/RitualBehaviorDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]/roles/li[id="leader"]</xpath>
+        <xpath
+        >Defs/RitualBehaviorDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]/roles/li[id="leader"]</xpath>
         <value>
             <substitutable>true</substitutable>
         </value>
@@ -37,9 +41,21 @@
 
     <!-- Disable ideo coloring on the trial gizmo -->
     <Operation Class="PatchOperationAdd">
-        <xpath>Defs/PreceptDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]</xpath>
+        <xpath
+        >Defs/PreceptDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]</xpath>
         <value>
             <iconIgnoresIdeoColor>true</iconIgnoresIdeoColor>
+        </value>
+    </Operation>
+
+    <!-- Soft cooldown (12h) instead of the default 20-day repeat penalty -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath
+        >Defs/PreceptDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]</xpath>
+        <value>
+            <li Class="Broski.Judiciary.Trials.TrialRitualExtension">
+                <cooldownTicks>30000</cooldownTicks>
+            </li>
         </value>
     </Operation>
 </Patch>
