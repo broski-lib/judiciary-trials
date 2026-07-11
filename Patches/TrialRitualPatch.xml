@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-    <!-- Remove trial ability from leader group, making it a Ritual -->
-    <Operation Class="PatchOperationRemove">
+    <!--
+        Swap the trial ritual's ability-group cooldown off the shared "Leader"
+        group onto a dedicated "TrialCooldown" group.
+    -->
+    <Operation Class="PatchOperationReplace">
         <xpath
         >Defs/PreceptDef[defName="Trial"]/useCooldownFromAbilityGroupDef</xpath>
+        <value>
+            <useCooldownFromAbilityGroupDef>TrialCooldown</useCooldownFromAbilityGroupDef>
+        </value>
     </Operation>
 
     <!-- Remove trial ability from leader-->
@@ -45,17 +51,6 @@
         >Defs/PreceptDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]</xpath>
         <value>
             <iconIgnoresIdeoColor>true</iconIgnoresIdeoColor>
-        </value>
-    </Operation>
-
-    <!-- Soft cooldown (12h) instead of the default 20-day repeat penalty -->
-    <Operation Class="PatchOperationAddModExtension">
-        <xpath
-        >Defs/PreceptDef[defName="Trial" or defName="TrialPrisoner" or defName="TrialMentalState"]</xpath>
-        <value>
-            <li Class="Broski.Judiciary.Trials.TrialRitualExtension">
-                <cooldownTicks>30000</cooldownTicks>
-            </li>
         </value>
     </Operation>
 </Patch>

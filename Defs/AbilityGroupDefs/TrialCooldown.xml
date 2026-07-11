@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+    Custom cooldown group for trial rituals.
+
+    Replaces the vanilla "Leader" group, which is shared with LeaderSpeech,
+    WorkDrive, and CombatCommand. Trials use this group instead, so they do
+    not block (and are not blocked by) the leader's other abilities.
+
+    cooldownTicks: 12 in-game hours (matches the previous soft cooldown).
+    ritualRoleIds: must be non-empty for RitualBehaviorWorker to invoke
+                   Notify_CooldownFromAbilityStarted on the precept. The role
+                   is only used to look up pawns whose abilities might share
+                   this group; the trial-specific group has no such abilities,
+                   so the lookup is a no-op and the ritual cooldown still
+                   gets set on the precept.
+  -->
+  <AbilityGroupDef>
+    <defName>TrialCooldown</defName>
+    <cooldownTicks>30000</cooldownTicks>
+    <ritualRoleIds>
+      <li>leader</li>
+    </ritualRoleIds>
+  </AbilityGroupDef>
+
+</Defs>

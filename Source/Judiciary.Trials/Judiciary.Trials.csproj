@@ -8,6 +8,13 @@
     <Nullable>disable</Nullable>
     <RootNamespace>Broski.Judiciary.Trials</RootNamespace>
     <AssemblyName>Judiciary.Trials</AssemblyName>
+
+    <!--
+      Match VEM convention: list every .cs file explicitly. The implicit
+      glob is disabled so adding a new file under Source/ won't silently
+      compile - it must be added here.
+    -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +39,14 @@
       <HintPath>$(RimWorldHarmonyDll)</HintPath>
       <Private>False</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Judiciary.Trials\Command_TrialRitual.cs" />
+    <Compile Include="Judiciary.Trials\DefOfs\InternalDefOf.cs" />
+    <Compile Include="Judiciary.Trials\Harmony\HarmonyInstance.cs" />
+    <Compile Include="Judiciary.Trials\Harmony\Precept_Ritual_GetGizmoFor.cs" />
+    <Compile Include="Judiciary.Trials\Utilities\TrialUtility.cs" />
   </ItemGroup>
 
 </Project>
