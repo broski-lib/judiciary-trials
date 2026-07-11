@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <IssueDef>
+        <defName>Judiciary_TrierOfFact</defName>
+        <label>trier of fact</label>
+    </IssueDef>
+
+    <PreceptDef>
+        <defName>Judiciary_TrierOfFact_Bench</defName>
+        <issue>Judiciary_TrierOfFact</issue>
+        <label>bench trial</label>
+        <description>Justice is too volatile and critical a matter to be left to the emotional whims
+            of the common crowd. A single, clear-headed magistrate must weigh the evidence and
+            dictate the absolute truth.</description>
+        <impact>Low</impact>
+        <displayOrder>10</displayOrder>
+    </PreceptDef>
+
+    <PreceptDef>
+        <defName>Judiciary_TrierOfFact_Jury</defName>
+        <issue>Judiciary_TrierOfFact</issue>
+        <label>jury trial</label>
+        <description>No individual is infallible, and absolute power over life and liberty corrupts.
+            A collective panel of one's peers must weigh the truth together to ensure true,
+            uncorrupted justice.</description>
+        <impact>Medium</impact>
+        <displayOrder>20</displayOrder>
+    </PreceptDef>
+
+</Defs>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <IssueDef>
+        <defName>Judiciary_BurdenOfProof</defName>
+        <label>burden of proof</label>
+    </IssueDef>
+
+    <PreceptDef>
+        <defName>Judiciary_BurdenOfProof_Preponderance</defName>
+        <issue>Judiciary_BurdenOfProof</issue>
+        <label>preponderance of evidence</label>
+        <description>A balanced, pragmatic approach to order. If the likelihood of wrongdoing
+            outweighs innocence by even a hair, the colony must act to safeguard the collective
+            stability.</description>
+        <impact>Low</impact>
+        <displayOrder>10</displayOrder>
+    </PreceptDef>
+
+    <PreceptDef>
+        <defName>Judiciary_BurdenOfProof_ReasonableDoubt</defName>
+        <issue>Judiciary_BurdenOfProof</issue>
+        <label>beyond reasonable doubt</label>
+        <description>Every soul is innocent until the dark shadow of absolute certainty falls. We
+            believe it is infinitely better to let a dozen guilty scoundrels walk free than to
+            mistakenly condemn a single innocent comrade.</description>
+        <impact>Medium</impact>
+        <displayOrder>20</displayOrder>
+    </PreceptDef>
+
+    <PreceptDef>
+        <defName>Judiciary_BurdenOfProof_PresumptionOfGuilt</defName>
+        <issue>Judiciary_BurdenOfProof</issue>
+        <label>presumption of guilt</label>
+        <description>Accusation is itself the first proof of disharmony. If a soul has been brought
+            before the court, they have already disrupted the peace; the weight lies solely on them
+            to scrub away the stain of suspicion.</description>
+        <impact>High</impact>
+        <displayOrder>30</displayOrder>
+    </PreceptDef>
+
+</Defs>
