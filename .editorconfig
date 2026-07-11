@@ -1,0 +1,173 @@
+# RimWorld C# style (decompiled source of truth — there is no published
+# RimWorld style guide, so we infer from the engine code itself).
+# Closely follows the .NET Framework Design Guidelines and Unity's C#
+# coding-style page, with one deviation: public mutable fields use
+# camelCase (not PascalCase). See Precept_Ritual.cs for canonical
+# examples (`activeObligations`, `lastFinishedTick`, `nameMaker`, ...).
+#
+# This file is the source of truth for formatting. VSCodium picks it up
+# automatically; `dotnet format` reads it via the Roslyn analyzer rules.
+root = true
+
+# ---------------------------------------------------------------------------
+# Whitespace & line endings (all files)
+# ---------------------------------------------------------------------------
+[*]
+charset                  = utf-8
+end_of_line              = lf
+indent_style             = space
+indent_size              = 4
+insert_final_newline     = true
+trim_trailing_whitespace = true
+
+# Trim trailing whitespace in XML/Patch files too (except for the single
+# trailing newline).
+[*.{xml,csproj,props,targets,json}]
+indent_size = 4
+
+# ---------------------------------------------------------------------------
+# C# — Unity style
+# ---------------------------------------------------------------------------
+[*.cs]
+
+# --- Naming styles ---------------------------------------------------------
+# Unity uses PascalCase for public/protected members and camelCase for
+# private fields/parameters/locals (no _ or m_ prefix).
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+dotnet_naming_style.camel_case.capitalization = camel_case
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+dotnet_naming_style.underscore_camel_case.capitalization  = camel_case
+
+# --- Symbol kinds ----------------------------------------------------------
+dotnet_naming_symbols.types.applicable_kinds           = class,struct,enum,delegate,interface
+dotnet_naming_symbols.interfaces.applicable_kinds      = interface
+dotnet_naming_symbols.methods.applicable_kinds         = method
+dotnet_naming_symbols.properties.applicable_kinds      = property
+dotnet_naming_symbols.events.applicable_kinds          = event
+dotnet_naming_symbols.public_fields.applicable_kinds   = field
+dotnet_naming_symbols.public_fields.applicable_accessibilities = public,protected,internal
+dotnet_naming_symbols.private_fields.applicable_kinds  = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.parameters.applicable_kinds      = parameter
+dotnet_naming_symbols.constants.applicable_kinds       = field
+dotnet_naming_symbols.constants.required_modifiers     = const
+
+# --- Naming rules ----------------------------------------------------------
+dotnet_naming_rule.types_should_be_pascal_case.symbols  = types
+dotnet_naming_rule.types_should_be_pascal_case.style    = pascal_case
+dotnet_naming_rule.types_should_be_pascal_case.severity = warning
+
+dotnet_naming_rule.interfaces_should_be_ipascal_case.symbols  = interfaces
+dotnet_naming_rule.interfaces_should_be_ipascal_case.style    = pascal_case
+dotnet_naming_rule.interfaces_should_be_ipascal_case.severity = warning
+
+dotnet_naming_rule.methods_should_be_pascal_case.symbols  = methods
+dotnet_naming_rule.methods_should_be_pascal_case.style    = pascal_case
+dotnet_naming_rule.methods_should_be_pascal_case.severity = warning
+
+dotnet_naming_rule.properties_should_be_pascal_case.symbols  = properties
+dotnet_naming_rule.properties_should_be_pascal_case.style    = pascal_case
+dotnet_naming_rule.properties_should_be_pascal_case.severity = warning
+
+dotnet_naming_rule.events_should_be_pascal_case.symbols  = events
+dotnet_naming_rule.events_should_be_pascal_case.style    = pascal_case
+dotnet_naming_rule.events_should_be_pascal_case.severity = warning
+
+# Public mutable fields use camelCase in RimWorld (e.g. `lastFinishedTick`,
+# `activeObligations`). No analyzer rule — convention enforced by review.
+
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols  = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style    = camel_case
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = warning
+
+# IDE1006 (naming style) is too noisy for a patching-heavy codebase:
+# Harmony `__result`/`__instance`, vanilla defs, and field-renaming for
+# patch injection routinely trip it. Disabled globally; the other
+# naming rules above still enforce the parts that matter.
+dotnet_diagnostic.IDE1006.severity = none
+
+dotnet_naming_rule.parameters_should_be_camel_case.symbols  = parameters
+dotnet_naming_rule.parameters_should_be_camel_case.style    = camel_case
+dotnet_naming_rule.parameters_should_be_camel_case.severity = warning
+
+dotnet_naming_rule.constants_should_be_pascal_case.symbols  = constants
+dotnet_naming_rule.constants_should_be_pascal_case.style    = pascal_case
+dotnet_naming_rule.constants_should_be_pascal_case.severity = warning
+
+# --- Braces & layout -------------------------------------------------------
+# Unity / .NET: Allman style for type/method, K&R for control flow.
+csharp_new_line_before_open_brace                               = all
+csharp_new_line_before_else                                    = true
+csharp_new_line_before_catch                                   = true
+csharp_new_line_before_finally                                 = true
+csharp_new_line_before_members_in_object_initializers           = true
+csharp_new_line_before_members_in_anonymous_types               = true
+csharp_new_line_between_query_expression_clauses                = true
+
+# Indent braces/blocks/swatches
+csharp_indent_case_contents                                    = true
+csharp_indent_switch_labels                                    = true
+csharp_indent_block_contents                                   = true
+csharp_indent_braces                                           = false
+
+# --- Spacing ---------------------------------------------------------------
+csharp_space_after_cast                                        = false
+csharp_space_after_keywords_in_control_flow_statements         = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses    = false
+csharp_space_before_colon_in_inheritance_clause                = true
+csharp_space_after_colon_in_inheritance_clause                 = true
+csharp_space_around_binary_operators                           = before_and_after
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis  = false
+csharp_space_between_parentheses                               = false
+
+# --- One statement per line -----------------------------------------------
+# Unity style: "one statement per line". Flag any case where the body of
+# an if/for/foreach/while/do/using block is collapsed onto the same line
+# as the keyword, and prevent blank-line-only blocks.
+csharp_style_allow_embedded_statements_on_same_line = false:warning
+csharp_style_allow_blank_lines_between_consecutive_braces = false:warning
+csharp_style_allow_block_includes = false:warning
+
+# --- var usage ------------------------------------------------------------
+# Unity generally avoids `var` unless the type is obvious; soften to
+# suggestion so the project is consistent.
+csharp_style_var_for_built_in_types          = false:suggestion
+csharp_style_var_when_type_is_apparent       = true:suggestion
+csharp_style_var_elsewhere                   = false:suggestion
+
+# --- this. qualification --------------------------------------------------
+# Unity does not use `this.` for member access.
+dotnet_style_qualification_for_field            = false:suggestion
+dotnet_style_qualification_for_property         = false:suggestion
+dotnet_style_qualification_for_method           = false:suggestion
+dotnet_style_qualification_for_event           = false:suggestion
+
+# --- Pattern matching & modernisations -----------------------------------
+csharp_style_pattern_matching_over_is_with_cast_check       = true:warning
+csharp_style_pattern_matching_over_as_with_null_check       = true:warning
+csharp_style_pattern_matching_over_switch_with_type         = true:suggestion
+
+# --- Sort using directives System.* first, then others --------------------
+dotnet_sort_system_directives_first                          = true
+dotnet_separate_import_directive_groups                      = false
+
+# --- File header preferences ----------------------------------------------
+csharp_using_directive_placement                           = outside_namespace:warning
+dotnet_style_namespace_match_folder                        = false:warning
+
+# --- Suppress IDE0007 (unused using) enforcement style --------------------
+# (left to the IDE; not a Unity concern)
+
+# --- Organize: trailing comma, no multiple blank lines -------------------
+csharp_style_allow_trailing_comma_in_arg_list               = false:warning
+
+# ---------------------------------------------------------------------------
+# Patches / Defs XML — preserve line breaks & final newline
+# ---------------------------------------------------------------------------
+[Patches/**.xml]
+indent_size = 4
+
+[Defs/**.xml]
+indent_size = 4

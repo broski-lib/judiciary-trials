@@ -11,7 +11,7 @@ namespace Broski.Judiciary.Trials
     // Trial/TrialPrisoner/TrialMentalState ritual via TrialUtility.RitualFor.
     // Non-trial rituals pass through untouched.
     [HarmonyPatch(typeof(Precept_Ritual), nameof(Precept_Ritual.GetGizmoFor))]
-    public static class Patch_Precept_Ritual_GetGizmoFor
+    public static class PatchPreceptRitualGetGizmoFor
     {
         [HarmonyPostfix]
         public static IEnumerable<Gizmo> Postfix(

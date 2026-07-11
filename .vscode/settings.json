@@ -1,0 +1,46 @@
+{
+  // Workspace settings for VSCodium + C# extension.
+  // Style rules live in the repo-root .editorconfig — this file only
+  // holds things the .editorconfig can't express.
+
+  // Pick up the .NET SDK as the C# language server.
+  "omnisharp.useModernNet": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "omnisharp.enableRoslynAnalyzers": true,
+
+  // Apply the editor's Format Document command on save.
+  "editor.formatOnSave": true,
+
+  // Don't let the editor fight the .editorconfig.
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+
+  // File-type specific overrides.
+  "[csharp]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+
+  "[xml]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+
+  // Recommended extension pack for this repo.
+  "extensions.recommendations": [
+    "ms-dotnettools.csharp"
+  ],
+
+  // Hide generated build artefacts from the file tree.
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/.vs": true
+  }
+}

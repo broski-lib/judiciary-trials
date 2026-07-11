@@ -1,5 +1,5 @@
-using HarmonyLib;
 using System.Reflection;
+using HarmonyLib;
 using Verse;
 
 namespace Broski.Judiciary.Trials

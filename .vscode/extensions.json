@@ -1,0 +1,6 @@
+{
+  // Recommend the C# extension when this workspace is opened.
+  "recommendations": [
+    "ms-dotnettools.csharp"
+  ]
+}
